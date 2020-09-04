@@ -1,0 +1,35 @@
+# WARNING: this file is not suitable for production, please use with caution
+version: '3'
+
+services:
+  web:
+    image: baoapi
+    build: .
+    command: gunicorn -b 0.0.0.0:5000 baoapi.wsgi:app
+    env_file:
+      - ./.flaskenv
+    environment:
+      - DATABASE_URI=sqlite:////db/baoapi.db
+      - CELERY_BROKER_URL=amqp://guest:guest@rabbitmq
+      - CELERY_RESULT_BACKEND_URL=redis://redis
+    volumes:
+      - ./baoapi:/code/baoapi
+      - ./db/:/db/
+    ports:
+      - "5000:5000"
+  rabbitmq:
+    image: rabbitmq
+  redis:
+    image: redis
+  celery:
+    image: baoapi
+    command: "celery worker -A baoapi.celery_app:app"
+    env_file:
+      - ./.flaskenv
+    volumes:
+      - .:/code
+    depends_on:
+      - rabbitmq
+    environment:
+      - CELERY_BROKER_URL=amqp://guest:guest@rabbitmq
+      - CELERY_RESULT_BACKEND_URL=redis://redis

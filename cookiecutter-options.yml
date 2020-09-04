@@ -1,0 +1,9 @@
+default_context:
+    project_name: "baotran_flask"
+    app_name: "baoapi"
+    python_version: "3.7"
+    admin_user_username: "baotran"
+    admin_user_email: "tranthanhbao2207@gmail.com"
+    admin_user_password: "pass123"
+    use_celery: "yes"
+    wsgi_server: "gunicorn"
