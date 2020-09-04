@@ -6,16 +6,33 @@
 # for celery: docker run --env-file=.flaskenv image celery worker -A myapi.celery_app:app
 #
 # note that celery will require a running broker and result backend
-FROM python:3.7
+# FROM python:3.70-slim
 
-RUN mkdir /code
-WORKDIR /code
+# RUN mkdir /code
+# WORKDIR /code
 
-COPY requirements.txt setup.py tox.ini ./
+# COPY requirements.txt setup.py tox.ini ./
+# RUN pip install -r requirements.txt
+# RUN pip install -e .
+
+# COPY baoapi baoapi/
+# COPY migrations migrations/
+
+# EXPOSE 5000
+
+FROM python:3.7-slim
+
+# Copy local code to the container image.
+ENV APP_HOME /app
+WORKDIR $APP_HOME
+COPY . ./
+
+# Install production dependencies.
 RUN pip install -r requirements.txt
 RUN pip install -e .
 
-COPY baoapi baoapi/
-COPY migrations migrations/
-
-EXPOSE 5000
+# Run the web service on container startup. Here we use the gunicorn
+# webserver, with one worker process and 8 threads.
+# For environments with multiple CPU cores, increase the number of workers
+# to be equal to the cores available.
+CMD exec baoapi run
