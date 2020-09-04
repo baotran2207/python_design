@@ -17,6 +17,10 @@ def create_app(testing=False, cli=False):
     configure_apispec(app)
     register_blueprints(app)
     init_celery(app)
+    
+    @app.route('/health',methods=['GET'])
+    def check():
+        return 'ok',200
 
     return app
 
