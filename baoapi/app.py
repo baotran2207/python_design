@@ -18,9 +18,9 @@ def create_app(testing=False, cli=False):
     register_blueprints(app)
     init_celery(app)
     
-    @app.route('/health',methods=['GET'])
+    @app.route('/',methods=['GET'])
     def check():
-        return 'ok',200
+        return 'Hello traveller',200
 
     return app
 
