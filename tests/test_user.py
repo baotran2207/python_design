@@ -4,10 +4,10 @@ from baoapi.models import User
 
 def test_get_user(client, db, user, admin_headers):
     # test 404
-    user_url = url_for('api.user_by_id', user_id="100000")
+    user_url = url_for('api.user_by_id', user_id="sdsds")
     rep = client.get(user_url, headers=admin_headers)
     assert rep.status_code == 404
-
+    print(' test user ', user, user.id , user.email)
     db.session.add(user)
     db.session.commit()
 
@@ -24,7 +24,7 @@ def test_get_user(client, db, user, admin_headers):
 
 def test_put_user(client, db, user, admin_headers):
     # test 404
-    user_url = url_for('api.user_by_id', user_id="100000")
+    user_url = url_for('api.user_by_id', user_id="sdadsa")
     rep = client.put(user_url, headers=admin_headers)
     assert rep.status_code == 404
 
@@ -79,6 +79,23 @@ def test_create_user(client, db, admin_headers):
 
     assert user.username == "created"
     assert user.email == "create@mail.com"
+
+
+def test_create_user_error(client, db, admin_headers):
+    # test bad data
+    users_url = url_for('api.users')
+    data = {"username": "created"}
+    rep = client.post(users_url, json=data, headers=admin_headers)
+    assert rep.status_code == 400
+
+    data["password"] = "admin"
+    data["email"] = "sadsadsada"
+
+    rep = client.post(users_url, json=data, headers=admin_headers)
+    assert rep.status_code == 400
+    data = rep.get_json()
+
+    assert data.get('email')[0] == 'Not a valid email address.'
 
 
 def test_get_all_user(client, db, user_factory, admin_headers):

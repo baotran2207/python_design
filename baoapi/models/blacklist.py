@@ -16,10 +16,11 @@ https://github.com/vimalloc/flask-jwt-extended/blob/master/examples/database_bla
 """
 from baoapi.extensions import db
 
-
-class TokenBlacklist(db.Model):
+from baoapi.models.BaseModel import Base
+class TokenBlacklist(Base):
     """Blacklist representation
     """
+    __tablename__ = 'TokenBlacklist'
 
     id = db.Column(db.Integer, primary_key=True)
     jti = db.Column(db.String(36), nullable=False, unique=True)
