@@ -5,16 +5,19 @@ steps:
     entrypoint: /bin/sh
     args:
     - -c
-    - 'apt-get update;apt-get install python3-dev default-libmysqlclient-dev gcc  -y;apt-get clean'
+    - 'apt-get install postgresql-dev -y ;apt-get clean'
     - 'pip install -r requirements-frozen.txt && pytest'
   # Build the container image
   - name: 'gcr.io/cloud-builders/docker'
+    id: Build-image
     args: ['build', '-t', 'gcr.io/codegenerator-282912/python_design:$COMMIT_SHA', '.']
   # Push the container image to Container Registry
   - name: 'gcr.io/cloud-builders/docker'
+    id: Push-image
     args: ['push', 'gcr.io/codegenerator-282912/python_design:$COMMIT_SHA']
   # Deploy container image to Cloud Run
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    id: Run-image
     entrypoint: gcloud
     args:
     - 'run'
