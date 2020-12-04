@@ -5,6 +5,7 @@ steps:
     entrypoint: /bin/sh
     args:
     - -c
+    - 'RUN apt-get update;RUN apt-get install python3-dev default-libmysqlclient-dev gcc  -y;RUN apt-get clean'
     - 'pip install -r requirements-frozen.txt && pytest'
   # Build the container image
   - name: 'gcr.io/cloud-builders/docker'
