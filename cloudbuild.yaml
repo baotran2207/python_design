@@ -26,5 +26,5 @@ steps:
     - '--platform'
     - 'managed'
     - '--allow-unauthenticated'
-    images:
-      - 'gcr.io/codegenerator-282912/python_design:$COMMIT_SHA'
+images:
+  - 'gcr.io/codegenerator-282912/python_design:$COMMIT_SHA'
