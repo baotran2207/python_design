@@ -1,11 +1,11 @@
 steps:
   # run test
-  - name: 'python:3.7-slim'
+  - name: 'python:3.8.2-slim'
     id: Test
     entrypoint: /bin/sh
     args:
     - -c
-    - 'apt-get update && apt-get -y install libgeos-dev;apt-get clean;pip install -r requirements-frozen.txt && pytest'
+    - 'apt-get update && apt-get -y install python3-dev libpq-dev;apt-get clean;pip install -r requirements-frozen.txt && pytest'
   # Build the container image
   - name: 'gcr.io/cloud-builders/docker'
     id: Build-image
