@@ -20,7 +20,7 @@
 
 # EXPOSE 5000
 
-FROM python:3.8.2-slim
+FROM python:3.8.2-slim-buster
 
 # Copy local code to the container image.
 ENV APP_HOME /app
