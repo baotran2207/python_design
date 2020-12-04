@@ -1,7 +1,7 @@
 from baoapi.models import User, TokenBlacklist
 from baoapi.extensions import ma, db
 from marshmallow import fields, validate
-
+from marshmallow_sqlalchemy import ModelSchema
 
 class BaseSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
@@ -10,8 +10,8 @@ class BaseSchema(ma.SQLAlchemyAutoSchema):
 
 class UserSchema(BaseSchema):
     
-    id = ma.String(dump_only=True)
-    password = ma.String(load_only=True, required=True)
+    # id = ma.String(dump_only=True)
+    # password = ma.String(load_only=True, required=True)
     email = fields.Email(required=True)
 
     # exp_token = fields.Nested(BlacklistSchema)
@@ -22,12 +22,12 @@ class UserSchema(BaseSchema):
 
 class BlacklistSchema(BaseSchema):
 
-    id = ma.String()
-    jti = ma.String()
-    token_type = ma.String()
-    revoked = ma.Boolean()
+    # id = ma.String()
+    # jti = ma.String()
+    # token_type = ma.String()
+    # revoked = ma.Boolean()
 
-    user = fields.Nested(UserSchema)
+    # user = fields.Nested(UserSchema)
     class Meta:
         model = TokenBlacklist
         load_instance = True

@@ -13,9 +13,6 @@ def cli():
     """Main entry point"""
 
 
-
-
-
 @cli.command("init")
 def init():
     """Create a new admin user

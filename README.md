@@ -2,14 +2,13 @@
 This is my scaffolding python with :
 - flask 
 - SQLalchemy (orm)
-- DB (postgres/mariadb ? not sure )
-- celery (redis)
-- cloudrun: Currently push to master will trigger deployment
-
+- celery(redis)
+- cloudrun (https://api.tranthanhbao.com/)
 TODO:
 [x] finalize CI/CD
 
 [ ] Add some basic functionality 
-    - [ ] passwor
-[ ] split pytest (it should not included) to reduce image size ? 
+    - [ ] password-reset
+    - [ ] Role-based user
+    - [ ] 
 
