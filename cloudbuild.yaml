@@ -1,23 +1,30 @@
- steps:
- # Build the container image
- - name: 'gcr.io/cloud-builders/docker'
-   args: ['build', '-t', 'gcr.io/codegenerator-282912/python_design:$COMMIT_SHA', '.']
- # Push the container image to Container Registry
- - name: 'gcr.io/cloud-builders/docker'
-   args: ['push', 'gcr.io/codegenerator-282912/python_design:$COMMIT_SHA']
- # Deploy container image to Cloud Run
- - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-   entrypoint: gcloud
-   args:
-   - 'run'
-   - 'deploy'
-   - 'baotranapi'
-   - '--image'
-   - 'gcr.io/codegenerator-282912/python_design:$COMMIT_SHA'
-   - '--region'
-   - 'europe-north1'
-   - '--platform'
-   - 'managed'
-   - '--allow-unauthenticated'
- images:
- - 'gcr.io/codegenerator-282912/python_design:$COMMIT_SHA'
+steps:
+  # run test
+  - name: 'python:3.7-slim'
+    id: Test
+    entrypoint: /bin/sh
+    args:
+    - -c
+    - 'pip install -r requirements-frozen.txt && pytest'
+  # Build the container image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/codegenerator-282912/python_design:$COMMIT_SHA', '.']
+  # Push the container image to Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/codegenerator-282912/python_design:$COMMIT_SHA']
+  # Deploy container image to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+    - 'run'
+    - 'deploy'
+    - 'baotranapi'
+    - '--image'
+    - 'gcr.io/codegenerator-282912/python_design:$COMMIT_SHA'
+    - '--region'
+    - 'europe-north1'
+    - '--platform'
+    - 'managed'
+    - '--allow-unauthenticated'
+  images:
+    - 'gcr.io/codegenerator-282912/python_design:$COMMIT_SHA'
