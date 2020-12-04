@@ -5,7 +5,7 @@ __version__ = "0.1"
 setup(
     name="baoapi",
     version=__version__,
-    packages=find_packages(exclude=["tests"]),
+    packages=find_packages(),
     install_requires=[
         "flask",
         "flask-sqlalchemy",

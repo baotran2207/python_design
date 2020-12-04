@@ -1,3 +1,4 @@
+#TODO: dev with docker
 .PHONY: init init-migration build run db-migrate test tox
 
 init:  build run

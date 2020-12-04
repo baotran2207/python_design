@@ -5,7 +5,6 @@ apispec==3.3.2
 apispec-webframeworks==0.5.2
 appdirs==1.4.4
 attrs==20.1.0
--e git+git@github.com:baotran2207/python_design.git@7cf8171bbb9daa5f9f27dc445392928e389958f8#egg=baoapi
 billiard==3.6.3.0
 celery==4.4.7
 certifi==2020.6.20
