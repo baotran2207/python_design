@@ -5,7 +5,7 @@ steps:
     entrypoint: /bin/sh
     args:
     - -c
-    - 'apt-get  install python-dev libpq-dev -y; pip install -r requirements-frozen.txt && pytest'
+    - 'apt-get -y install postgresql-dev gcc python3-dev musl-dev ; pip install -r requirements-frozen.txt && pytest'
   # Build the container image
   - name: 'gcr.io/cloud-builders/docker'
     id: Build-image
