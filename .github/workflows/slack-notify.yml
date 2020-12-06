@@ -8,6 +8,6 @@ jobs:
     - uses: craftech-io/slack-action@v1
     - name: Slack Notification
       uses: rtCamp/action-slack-notify@v2
-      # status: ${{ job.status }}
+      status: failure
       env:
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_CSIT }}
