@@ -11,9 +11,9 @@ on:
 
 jobs:
   build:
-
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_CSIT }}
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python 3.8
@@ -34,16 +34,9 @@ jobs:
     - name: Test with pytest
       run: |
         pytest
-  notify:
-    name: Slack Notification
-    runs-on: ubuntu-latest
-    steps:
-    - uses: craftech-io/slack-action@v1
-    - name: Slack Notification
-      uses: rtCamp/action-slack-notify@v2
-      with:
-          slack_webhook_url:  ${{ secrets.SLACK_WEBHOOK_CSIT }}
-          # slack_channel: general
-          slack_username: Github
-          status: failure
-      if: failure()
+    - uses: act10ns/slack@v1
+        with:
+          status: ${{ job.status }}
+          steps: ${{ toJson(steps) }}
+          # channel: '#workflows'
+        if: always()
