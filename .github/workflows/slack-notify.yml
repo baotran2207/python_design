@@ -8,6 +8,10 @@ jobs:
     - uses: craftech-io/slack-action@v1
     - name: Slack Notification
       uses: rtCamp/action-slack-notify@v2
-      status: failure
-      env:
-        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_CSIT }}
+      with:
+          slack_webhook_url:  ${{ secrets.SLACK_WEBHOOK_CSIT }}
+          # slack_channel: general
+          slack_username: Github
+          status: failure
+      if: failure()
+        # SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_CSIT }}
