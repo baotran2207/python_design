@@ -1,14 +1,19 @@
 # This workflow will install Python dependencies, run tests and lint with a single version of Python
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
 
-name: Python application
+name: actions CI-CD
 
 on:
   push:
-    branches: [ dev, master ]
+    branches:
+      - master
+      - dev
+      - deploy
   pull_request:
-    branches: [ dev, master ]
-
+    branches:
+      - master
+      - dev
+      - deploy
 jobs:
   build:
     env:
