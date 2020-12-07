@@ -35,10 +35,6 @@ CELERY_RESULT_BACKEND = os.getenv("CELERY_RESULT_BACKEND_URL")
 #     pass
 
 
-# class TestConfig(Config):
-#     DATABASE_URI='postgresql://dise:passw0rD!@95.216.114.137:5432/baotran_test'
-#     CELERY_BROKER_URL='redis://95.216.114.137:6380/0'
-#     CELERY_RESULT_BACKEND_URL='redis://95.216.114.137:6380/0'
 
 # class ProdConfig(Config):
 #     pass
