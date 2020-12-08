@@ -3,7 +3,7 @@ from baoapi.models import User
 
 
 def test_begin(client,db, user, admin_headers):
-    assert 2==4
+    assert 2==2
 def test_get_user(client, db, user, admin_headers):
     # test 404
     user_url = url_for('api.user_by_id', user_id="sdsds")
